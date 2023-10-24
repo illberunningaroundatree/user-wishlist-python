@@ -1,0 +1,23 @@
+language: generic
+
+services:
+  - docker
+
+after_success:
+  - docker build -t illberunningaroundatree/user-wishlist-python .
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push illberunningaroundatree/user-wishlist-python
+
+deploy: 
+  provider: elasticbeanstalk
+  region: eu-north-1
+  app: my-user-wishlist-python-app
+  env: My-user-wishlist-python-app-env-1
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket_name: "multi-container-wishlist-app1000"
+  bucket_path: "docker"
+  on:
+    branch: multi-cont-app
