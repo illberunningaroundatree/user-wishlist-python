@@ -1,0 +1,57 @@
+<center>
+    <h1> User Wish-List App </h1>
+    
+    <b> Створіть свій запис у списку бажань тут!</b>
+    
+    <form action="/save" method="POST">
+        
+        <label for="username">Нікнейм</label>
+        <input name="username" id="username" required><br><br>
+    
+        <label for="place">Улюблене місце:</label>
+        <input name="place" id="place" required><br><br>
+    
+        <label for="food">Улюблена їжа:</label>
+        <input name="food" id="food" required><br><br>
+    
+        <input type="submit" value="Save">
+    
+    </form>
+    
+    <b>Введіть ім’я користувача та отримайте WishList</b>
+    <form action="/get" method="POST">
+        <label for="username">Нікнейм</label>
+        <input name="username" id="username" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    
+    {% if get %}
+    <font color="blue">Список бажань для <b>{{username}}</b> is <b>{{place}}</b> і <b>{{food}}</b></font>
+    <small>{{msg}}</small>
+    {% endif %}
+    
+    {% if no_record %}
+    <font color="red">{{msg}}</font>
+    {% endif %}
+    
+    {% if user_exists %}
+    <font color="red">Користувач <b>{{username}}</b> вже існує в списку бажань <b>{{place}}</b> і <b>{{food}}</b></font>
+    <small>{{msg}}</small>
+    {% endif %}
+    
+    {% if saved %}
+    <font color="green"> Успішно збережено дані для <b>{{username}}</b> зі списком бажань <b>{{place}}</b> і <b>{{food}}</b>!!!</font>
+    {% endif %}
+    
+    </center>
+    <br>
+    <a href="/keys">Ключі</a>
+    {% if keys %}
+        <h3> Ключі </h3>
+        <small>(From DataBase)</small>
+        <ul>
+        {% for username in usernames %}
+            <li>{{username}}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
