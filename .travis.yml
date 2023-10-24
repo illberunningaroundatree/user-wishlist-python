@@ -14,7 +14,7 @@ deploy:
   provider: elasticbeanstalk
   region: eu-north-1
   app: my-user-wishlist-python-app
-  env: My-user-wishlist-python-app-env-1
+  env: My-user-wishlist-python-app-env-2
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   bucket_name: "multi-container-wishlist-app1000"
